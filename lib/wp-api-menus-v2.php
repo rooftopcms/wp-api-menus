@@ -20,7 +20,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
      */
     class WP_REST_Menus {
         public static function api_namespace() {
-            return 'wp/v2';
+            return 'wp-api-menus/v2';
         }
 
         /**
@@ -78,7 +78,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
          */
         public static function get_menus() {
 
-            $rest_url = get_rest_url() . '/menus/';
+            $rest_url = get_rest_url(null, 'wp-api-menus/v2') . '/menus/';
             $wp_menus = wp_get_nav_menus();
 
             $i = 0;
@@ -115,7 +115,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
         public function get_menu( $request ) {
 
             $id = (int) $request['id'];
-            $rest_url = get_rest_url() . self::api_namespace() . '/menus/';
+            $rest_url = get_rest_url(null, self::api_namespace()) . '/menus/';
             $wp_menu_object = $id ? wp_get_nav_menu_object( $id ) : array();
             $wp_menu_items = $id ? wp_get_nav_menu_items( $id ) : array();
 
@@ -202,7 +202,7 @@ if ( ! class_exists( 'WP_REST_Menus' ) ) :
          */
         public static function get_menu_locations( $request ) {
 
-            $rest_url = get_rest_url() . self::api_namespace() . '/menu-locations/';
+            $rest_url = get_rest_url(null, self::api_namespace()) . '/menu-locations/';
 
             $locations = get_nav_menu_locations();
             $registered_menus = get_registered_nav_menus();
